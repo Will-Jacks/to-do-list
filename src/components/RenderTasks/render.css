@@ -1,0 +1,28 @@
+
+
+
+
+.update-form-state-button {
+    margin-top: 10px;
+}
+
+.container-tasks {
+    margin-top: 10px;
+}
+
+.tasks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 3px;
+}
+
+.finish-task {
+    width: 40px;
+    height: 20px;
+    background-color: green;
+    border: none;
+    border-radius: 10px;
+}

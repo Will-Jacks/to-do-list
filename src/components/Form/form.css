@@ -1,0 +1,48 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+input {
+    height: 30px;
+    max-width: 600px;
+}
+
+#task-type {
+    height: 30px;
+    text-align: center;
+    max-width: 600px;
+}
+
+#task-type:hover {
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 40px;
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    transition: background-color 0.5s;
+}
+
+
+.button:hover {
+    cursor: pointer;
+    background-color: #cfcfcf;
+    
+}
