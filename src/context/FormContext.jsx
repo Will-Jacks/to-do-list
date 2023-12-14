@@ -38,7 +38,7 @@ export const FormProvider = ({ children }) => {
 
 
         //Deu erro aqui, não estou conseguindo exibir as tasks completas
-        setFinishedTasks([...finishedTasks, completedTasks]);
+        //setFinishedTasks([...finishedTasks, completedTasks]);
         //Corrigir depois
 
     }   
