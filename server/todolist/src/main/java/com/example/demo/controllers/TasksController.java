@@ -31,4 +31,15 @@ public class TasksController {
         }
 
     }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+        try {
+            tasksRepository.deleteById(id);
+            return ResponseEntity.ok("Tarefa excluída com sucesso!");
+        } catch(Exception e) {
+            return ResponseEntity.status(500).body("Falha ao excluir tarefa!");
+        }
+    }
+
 }

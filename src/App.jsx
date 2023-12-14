@@ -4,7 +4,7 @@ import Form from './components/Form/Form';
 import Header from './components/Header/Header.jsx';
 import RenderTasks from './components/RenderTasks/RenderTasks';
 import TaskSection from './components/TaskSection/TaskSection';
-import { Tasks } from './components/Tasks/Tasks.jsx';
+
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       {
         formState ? (<Form />) : ''
       }
-      <Tasks />
+      
       <RenderTasks />
     </div>
   )
