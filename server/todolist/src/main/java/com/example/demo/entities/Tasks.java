@@ -17,4 +17,10 @@ public class Tasks {
     private String taskName;
     private String taskType;
     private Date created_at;
+
+    @PrePersist
+    protected void onCreate() {
+        this.created_at = new Date();
+    }
+    //Cria a data do sistema e salva automaticamente
 }

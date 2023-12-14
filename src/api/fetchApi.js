@@ -8,11 +8,11 @@ async function fetchApi(url) {
 
         const data = await response.json();
 
-        return data;
+        return { success: true, data };
     }
     catch (err) {
         console.error(err)
-        return "Não foi possível se conectar à api";
+        return { success: false, error: "Não foi possível se conectar à api" };
     }
 }
 

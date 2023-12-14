@@ -1,11 +1,11 @@
 import './form.css';
 import { useState } from 'react';
 import { useTaskContext } from "../../context/TaskContext";
-import { TaskData } from "../Tasks/Tasks.jsx";
+import { TaskData, postTask } from "../Tasks/Tasks.jsx";
+import { useFormContext } from '../../context/FormContext.jsx';
 function Form() {
     const { updateValue } = useTaskContext();
-    const [inputValue, setInputValue] = useState('');
-    const [selectValue, setSelectValue] = useState('Pessoal');
+    const { inputValue, selectValue, setInputValue, setSelectValue } = useFormContext();
 
     function updateInputValue(e) {
         setInputValue(e.target.value);
@@ -20,9 +20,11 @@ function Form() {
         if (inputValue.length > 0) {
             const newTask = new TaskData(inputValue, selectValue);
             updateValue(newTask);
+            postTask(newTask);
             setInputValue('');
             return;
         }
+
         return alert('Preencha os campos corretamente!');
     }
 
