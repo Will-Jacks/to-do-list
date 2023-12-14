@@ -10,6 +10,11 @@ public class Hello {
 
     @GetMapping("/ola")
     public String retornaOi() {
-        return "Oi";
+        return "Oi, tudo bem?";
+    }
+
+    @GetMapping("/xau")
+    public String retornaXau() {
+        return "Xau";
     }
 }
