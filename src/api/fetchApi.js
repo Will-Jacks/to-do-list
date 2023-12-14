@@ -1,12 +1,12 @@
 async function fetchApi(url) {
     try {
-        const returnedApiData = await fetch(url);
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error(`Erro na solicitação da API. Status: ${response.status}`);
         }
 
-        const data = await returnedApiData.text();
+        const data = await response.json();
 
         return data;
     }
