@@ -10,12 +10,12 @@ import com.example.demo.entities.Tasks;
 import java.util.List;
 
 @RestController
-@RequestMapping("/controller")
+@RequestMapping("/tasks")
 public class TasksController {
     @Autowired
     private TasksRepository tasksRepository;
 
-    @GetMapping("/tasks")
+    @GetMapping("/all")
     public List<Tasks> getAllTasks() {
         return tasksRepository.findAll();
     }

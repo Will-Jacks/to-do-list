@@ -1,10 +1,10 @@
 import './render.css';
-import { useFormContext } from "../../context/FormContext";
+import { useTaskContext } from "../../context/TaskContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function RenderTasks() {
-    const { tasks, changeTaskBehavior } = useFormContext();
+    const { tasks, changeTaskBehavior } = useTaskContext();
 
     return (
         <div>

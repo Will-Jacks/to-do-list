@@ -4,14 +4,14 @@ import App from './App.jsx'
 import './index.css'
 
 import { RenderFormProvider } from './context/RenderFormContext.jsx';
-import { FormProvider } from './context/FormContext';
+import { TaskProvider } from './context/TaskContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <div>
-    <FormProvider>
+    <TaskProvider>
       <RenderFormProvider>
         <App />
       </RenderFormProvider>
-    </FormProvider>
+    </TaskProvider>
   </div>,
 )

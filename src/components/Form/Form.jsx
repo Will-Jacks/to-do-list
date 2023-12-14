@@ -1,17 +1,9 @@
 import './form.css';
 import { useState } from 'react';
-import { useFormContext } from "../../context/FormContext";
-
-
-export class TaskData {
-    constructor(taskName, taskType) {
-        this.taskName = taskName;
-        this.taskType = taskType;
-    }
-}
-
+import { useTaskContext } from "../../context/TaskContext";
+import { TaskData } from "../Tasks/Tasks.jsx";
 function Form() {
-    const { setLocalStorageTasks } = useFormContext();
+    const { updateValue } = useTaskContext();
     const [inputValue, setInputValue] = useState('');
     const [selectValue, setSelectValue] = useState('Pessoal');
 
@@ -27,7 +19,7 @@ function Form() {
         e.preventDefault();
         if (inputValue.length > 0) {
             const newTask = new TaskData(inputValue, selectValue);
-            setLocalStorageTasks(newTask);
+            updateValue(newTask);
             setInputValue('');
             return;
         }

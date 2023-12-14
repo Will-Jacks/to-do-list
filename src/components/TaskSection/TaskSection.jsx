@@ -1,14 +1,14 @@
 import './taskSection.css';
 
 import { useRenderFormContext } from '../../context/RenderFormContext';
-import { useFormContext } from '../../context/FormContext';
+import { useTaskContext } from '../../context/TaskContext';
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function TaskSection() {
-    const { tasks } = useFormContext();
+    const { tasks } = useTaskContext();
     const { formState, updateFormState } = useRenderFormContext();
 
 
