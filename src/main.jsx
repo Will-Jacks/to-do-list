@@ -7,11 +7,11 @@ import { RenderFormProvider } from './context/RenderFormContext.jsx';
 import { FormProvider } from './context/FormContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <div>
     <FormProvider>
       <RenderFormProvider>
         <App />
       </RenderFormProvider>
     </FormProvider>
-  </React.StrictMode>,
+  </div>,
 )

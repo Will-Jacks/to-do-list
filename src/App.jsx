@@ -1,16 +1,13 @@
 import './App.css'
+import { useRenderFormContext } from './context/RenderFormContext';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header.jsx';
 import RenderTasks from './components/RenderTasks/RenderTasks';
-import { useFormContext } from './context/FormContext';
-import { useRenderFormContext } from './context/RenderFormContext';
-
 import TaskSection from './components/TaskSection/TaskSection';
+import FinishedTasks from './components/FinishedTasks/FinishedTasks.jsx';
 
 function App() {
-
-  const { tasks } = useFormContext();
-  const { formState, updateFormState } = useRenderFormContext();
+  const { formState } = useRenderFormContext();
 
   return (
     <div className='container-app'>
@@ -20,7 +17,7 @@ function App() {
       {
         formState ? (<Form />) : ''
       }
-
+      <FinishedTasks />
       <RenderTasks />
     </div>
   )

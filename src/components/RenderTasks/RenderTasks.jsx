@@ -1,11 +1,10 @@
 import './render.css';
 import { useFormContext } from "../../context/FormContext";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function RenderTasks() {
-    const { tasks, updateValue } = useFormContext();
+    const { tasks, changeTaskBehavior } = useFormContext();
 
     return (
         <div>
@@ -14,18 +13,18 @@ function RenderTasks() {
                     return (
                         <div className="tasks" key={index}>
                             <div>
-                                <h3>{element.inputValue}</h3>
-                                <p>{element.selectValue}</p>
+                                <h3>{element.taskName}</h3>
+                                <p>{element.taskType}</p>
                             </div>
                             <div>
-                                <button className="finish-task"><FontAwesomeIcon icon={faCheck} style={{ color: "#fff", }} /></button>
+                                <button className="finish-task" onClick={()=> changeTaskBehavior(index)}><FontAwesomeIcon icon={faCheck} style={{ color: "#fff", }} /></button>
                             </div>
                         </div>
                     )
                 })}
                 <div>
                 </div>
-            </div>
+            </div> 
         </div>
     );
 

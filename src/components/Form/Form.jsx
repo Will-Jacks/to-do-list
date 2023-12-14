@@ -1,12 +1,16 @@
 import './form.css';
 import { useState } from 'react';
 import { useFormContext } from "../../context/FormContext";
-import { useRenderFormContext } from '../../context/RenderFormContext';
 
+class TaskData {
+    constructor(taskName, taskType) {
+        this.taskName = taskName;
+        this.taskType = taskType;
+    }
+}
 
 function Form() {
     const { updateValue } = useFormContext();
-    const { updateFormState } = useRenderFormContext();
     const [inputValue, setInputValue] = useState('');
     const [selectValue, setSelectValue] = useState('Pessoal');
 
@@ -20,10 +24,10 @@ function Form() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if(inputValue) {
-            updateValue({ inputValue, selectValue });
+        if(inputValue.length > 0) {
+            const newTask = new TaskData(inputValue, selectValue);
+            updateValue(newTask);
             setInputValue('');
-            updateFormState(false);
             return;
         }
         return alert('Preencha os campos corretamente!');
