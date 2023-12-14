@@ -1,10 +1,10 @@
 import './form.css';
 import { useState } from 'react';
 import { useTaskContext } from "../../context/TaskContext";
-import { TaskData, postTask } from "../Tasks/Tasks.jsx";
+import { TaskData } from '../../context/TaskContext';
 import { useFormContext } from '../../context/FormContext.jsx';
 function Form() {
-    const { updateValue } = useTaskContext();
+    const { updateValue, postTask } = useTaskContext();
     const { inputValue, selectValue, setInputValue, setSelectValue } = useFormContext();
 
     function updateInputValue(e) {
@@ -18,7 +18,7 @@ function Form() {
     function handleSubmit(e) {
         e.preventDefault();
         if (inputValue.length > 0) {
-            const newTask = new TaskData(inputValue, selectValue);
+            const newTask = new TaskData(1, inputValue, selectValue);
             updateValue(newTask);
             postTask(newTask);
             setInputValue('');

@@ -20,6 +20,7 @@ export const useTaskContext = () => {
 export const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
 
+
     async function updateValue(newTask) {
         for (let i = 0; i < tasks.length; i++) {
             if (tasks[i].taskName == newTask.taskName) {
@@ -30,14 +31,11 @@ export const TaskProvider = ({ children }) => {
         setTasks(prevTasks => [...prevTasks, newTask]);
     }
 
-    const changeTaskBehavior = async (id) => {
-        try {
-            const deleteTasks = tasks.filter((_, index) => index != id); // Delete tasks
-            setTasks(deleteTasks);
-            await deleteTask(id);
-        } catch(e) {
-            console.error("Erro ao excluir tarefa", error);
-        }
+    const changeTaskBehavior = (id) => {
+
+        const deleteTasks = tasks.filter((element) => element.id != id); // Delete tasks
+        setTasks(deleteTasks);
+        deleteTask(id);
     }
 
     //    GET METHOD    //
@@ -93,7 +91,8 @@ export const TaskProvider = ({ children }) => {
     //    DELETE METHOD    //
 
     async function deleteTask(id) {
-        const url = `http://localhost:8080/tasks/excluir/${id}`
+        const url = `http://localhost:8080/tasks/excluir/${id}`;
+        console.log(id);
         try {
             const response = await fetch(url, {
                 method: 'DELETE',
