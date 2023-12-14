@@ -6,6 +6,8 @@ Tentativa de fazer um projeto fullstack
 
 2 - Banco de dados que persista os dados
 
-3 - Usuários
+3 - Criar métodos GET[x] POST[] PUT[] DELETE[]
 
-4 - Autenticação e segurança
+4 - Usuários
+
+5 - Autenticação e segurança

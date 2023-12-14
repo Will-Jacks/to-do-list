@@ -15,12 +15,18 @@ function App() {
 
   //Dá fetch na api e atualiza as tasks para serem renderizadas
   async function updateTasksWithApiData() {
-    const url = "http://localhost:8080/api/ola";
+    const url = "http://localhost:8080/controller/tasks";
     const response = await fetchApi(url);
-    const newTask = new TaskData(response.taskName, response.taskType);
     
-    if(tasks.length > 0) {
-      setLocalStorageTasks(newTask);
+
+    //Espera o localstorage terminar a promise para depois setar com os dados da API
+    if (tasks.length > 0) {
+
+      for (let i = 0; i < response.length; i++) {
+        const newTask = new TaskData(response[i].taskName, response[i].taskType);
+        setLocalStorageTasks(newTask);
+      } // Vai percorrer o retorno da API pra extrair os dados e renderiza-los
+
     }
   }
 
@@ -28,7 +34,7 @@ function App() {
   useEffect(() => {
     updateTasksWithApiData();
   }, []);
-  
+
   return (
     <div className='container-app'>
       <Header />
