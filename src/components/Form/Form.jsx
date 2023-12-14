@@ -1,9 +1,9 @@
 import './form.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFormContext } from "../../context/FormContext";
-import fetchApi from '../../api/fetchApi';
 
-class TaskData {
+
+export class TaskData {
     constructor(taskName, taskType) {
         this.taskName = taskName;
         this.taskType = taskType;
@@ -11,7 +11,7 @@ class TaskData {
 }
 
 function Form() {
-    const { updateValue } = useFormContext();
+    const { setLocalStorageTasks } = useFormContext();
     const [inputValue, setInputValue] = useState('');
     const [selectValue, setSelectValue] = useState('Pessoal');
 
@@ -25,9 +25,9 @@ function Form() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if(inputValue.length > 0) {
+        if (inputValue.length > 0) {
             const newTask = new TaskData(inputValue, selectValue);
-            updateValue(newTask);
+            setLocalStorageTasks(newTask);
             setInputValue('');
             return;
         }
@@ -54,7 +54,7 @@ function Form() {
                     <button type="submit" className='button'>Cadastrar tarefa</button>
                 </div>
 
-                
+
             </form>
         </section>
     )

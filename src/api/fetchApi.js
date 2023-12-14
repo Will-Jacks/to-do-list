@@ -12,7 +12,7 @@ async function fetchApi(url) {
     }
     catch (err) {
         console.error(err)
-        return null;
+        return "Não foi possível se conectar à api";
     }
 }
 

@@ -10,18 +10,28 @@ export const useFormContext = () => {
 
 export const FormProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
-    const [finishedTasks, setFinishedTasks] = useState([]);
 
     useEffect(() => {
-        setTasks(JSON.parse(localStorage.getItem('tasks')));
+        setTasks(JSON.parse(localStorage.getItem('tasks')) || []);
     }, []);
 
-    useEffect(() => {
+    useEffect(()=> {
         localStorage.setItem('tasks', JSON.stringify(tasks));
-    }, [tasks]);
+    },[tasks])
 
     const updateValue = (newTask) => {
-        setTasks([...tasks, newTask]);
+        setTasks(prevTasks => [...prevTasks, newTask]);
+    }
+
+    async function setLocalStorageTasks(newTask) {
+        for (let i = 0; i < tasks.length; i++) {
+            if(tasks[i].taskName == newTask.taskName) {
+                alert("Tarefa já criada anteriormente!");
+                return;
+            }
+        }
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        updateValue(newTask);
     }
 
     const changeTaskBehavior = (id) => {
@@ -31,20 +41,10 @@ export const FormProvider = ({ children }) => {
         }); // Delete tasks
         setTasks(incompleteTasks);
 
-        //Task done here!
-        const completedTasks = tasks.filter((_, index) => {
-            return index == id;
-        });
-
-
-        //Deu erro aqui, não estou conseguindo exibir as tasks completas
-        //setFinishedTasks([...finishedTasks, completedTasks]);
-        //Corrigir depois
-
     }   
 
     return (
-        <FormContext.Provider value={{ tasks, updateValue, changeTaskBehavior, finishedTasks }}>
+        <FormContext.Provider value={{ tasks , changeTaskBehavior, setLocalStorageTasks }}>
             {children}
         </FormContext.Provider>
     );
