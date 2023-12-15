@@ -1,7 +1,7 @@
 import './taskSection.css';
 
-import { useRenderFormContext } from '../../context/RenderFormContext';
-import { useTaskContext } from '../../context/TaskContext';
+import { useRenderFormContext } from '../../../context/Tasks/RenderFormContext';
+import { useTaskContext } from '../../../context/Tasks/TaskContext';
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

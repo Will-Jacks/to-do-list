@@ -1,5 +1,5 @@
 import './render.css';
-import { useTaskContext } from "../../context/TaskContext";
+import { useTaskContext } from "../../../context/Tasks/TaskContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from 'react';

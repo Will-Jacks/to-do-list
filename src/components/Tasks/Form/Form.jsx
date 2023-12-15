@@ -1,8 +1,8 @@
 import './form.css';
 import { useState } from 'react';
-import { useTaskContext } from "../../context/TaskContext";
-import { TaskData } from '../../context/TaskContext';
-import { useFormContext } from '../../context/FormContext.jsx';
+import { useTaskContext } from "../../../context/Tasks/TaskContext.jsx";
+import { TaskData } from '../../../context/Tasks/TaskContext.jsx';
+import { useFormContext } from '../../../context/Tasks/FormContext.jsx';
 function Form() {
     const { updateValue, postTask } = useTaskContext();
     const { inputValue, selectValue, setInputValue, setSelectValue } = useFormContext();
