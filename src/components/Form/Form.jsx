@@ -18,8 +18,7 @@ function Form() {
     function handleSubmit(e) {
         e.preventDefault();
         if (inputValue.length > 0) {
-            const newTask = new TaskData(1, inputValue, selectValue);
-            updateValue(newTask);
+            const newTask = new TaskData(parseInt(Math.floor(Math.random()* 100)), inputValue, selectValue);
             postTask(newTask);
             setInputValue('');
             return;

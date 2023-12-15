@@ -13,11 +13,6 @@ function App() {
   const { tasks } = useTaskContext();
   const { formState } = useRenderFormContext();
 
-  useEffect(()=> {
-
-  } 
-  ,[tasks])
-
   return (
     <div className='container-app'>
       <Header />

@@ -21,13 +21,8 @@ export const TaskProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
 
 
-    async function updateValue(newTask) {
-        for (let i = 0; i < tasks.length; i++) {
-            if (tasks[i].taskName == newTask.taskName) {
-                console.log("Erro ao cadastrar tarefa! Já existe no banco de dados!");
-                return;
-            }
-        }
+    function updateValue(newTask) {
+
         setTasks(prevTasks => [...prevTasks, newTask]);
     }
 
@@ -38,7 +33,7 @@ export const TaskProvider = ({ children }) => {
         deleteTask(id);
     }
 
-    //    GET METHOD    //
+    //    GET METHOD FRONT-END   //
     async function getTasks() {
 
         //Dá fetch na api e atualiza as tasks para serem renderizadas
@@ -57,7 +52,24 @@ export const TaskProvider = ({ children }) => {
             console.error("Erro ao solicitar dados da API", error);
         }
     }
-    //    GET METHOD    //
+    //    GET METHOD FRONT-END    //
+
+    async function changeLocalIdFromBackendReturnedId() {
+        //Dá fetch na api e atualiza as tasks para serem renderizadas
+        const url = "http://localhost:8080/tasks/all";
+        const { success, data, error } = await fetchApi(url);
+
+        if (success) {
+            let newTask;
+            // Vai percorrer o retorno da API pra extrair os dados e renderiza-los
+            for (let i = 0; i < data.length; i++) {
+                newTask = new TaskData(data[i].id, data[i].taskName, data[i].taskType);
+                setTasks([...tasks, newTask]);
+            }
+        } else {
+            console.error("Erro ao solicitar dados da API", error);
+        }
+    }
 
 
     //    POST METHOD    //
@@ -78,12 +90,11 @@ export const TaskProvider = ({ children }) => {
                 throw new Error("Falha ao tentar cadastrar tarefa!");
             }
 
-            const data = await response.text();
-            console.log(data);
+            changeLocalIdFromBackendReturnedId();
+
         } catch (e) {
             console.error("Erro durante a requisição POST", e.message);
         };
-
     }
     //    POST METHOD    //
 
@@ -92,7 +103,6 @@ export const TaskProvider = ({ children }) => {
 
     async function deleteTask(id) {
         const url = `http://localhost:8080/tasks/excluir/${id}`;
-        console.log(id);
         try {
             const response = await fetch(url, {
                 method: 'DELETE',
@@ -119,6 +129,11 @@ export const TaskProvider = ({ children }) => {
     useEffect(() => {
         getTasks();
     }, []);
+
+    useEffect(() => {
+
+    }, [tasks])
+
     return (
         <TaskContext.Provider value={{ tasks, changeTaskBehavior, updateValue, postTask }}>
             {children}

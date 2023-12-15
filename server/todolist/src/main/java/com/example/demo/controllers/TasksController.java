@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.repositories.TasksRepository;
+import com.example.demo.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,33 +14,21 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TasksController {
     @Autowired
-    private TasksRepository tasksRepository;
+    private TaskService taskService;
 
     @GetMapping("/all")
-    public List<Tasks> getAllTasks() {
-        return tasksRepository.findAll();
+    public List<Tasks> get() {
+        return taskService.getAllTasks();
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> postTask(@RequestBody Tasks task) {
-        try {
-            tasksRepository.save(task);
-            return new ResponseEntity<>("Cadastrado com sucecsso!", HttpStatus.CREATED);
-        }
-        catch (Exception e) {
-            return new ResponseEntity<>("Falha ao cadastrar tarefa! " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+    public ResponseEntity<String> post(@RequestBody Tasks task) {
+        return taskService.postTask(task);
     }
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
-        try {
-            tasksRepository.deleteById(id);
-            return ResponseEntity.ok("Tarefa excluída com sucesso!");
-        } catch(Exception e) {
-            return ResponseEntity.status(500).body("Falha ao excluir tarefa!");
-        }
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        return taskService.deleteTask(id);
     }
 
 }

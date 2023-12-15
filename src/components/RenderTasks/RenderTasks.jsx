@@ -7,16 +7,16 @@ import { useEffect } from 'react';
 function RenderTasks() {
     const { tasks, changeTaskBehavior } = useTaskContext();
 
-    useEffect(()=> console.log(tasks),[tasks])
     return (
         <div>
             <div className="container-tasks">
                 {tasks.map((element, index) => {
                     return (
-                        <div className="tasks" key={index}>
+                        <div className="tasks" key={element.id}>
                             <div>
                                 <h3>{element.taskName}</h3>
                                 <p>{element.taskType}</p>
+                                <p>ID: {element.id}</p>
                             </div>
                             <div>
                                 <button className="finish-task" onClick={()=> changeTaskBehavior(element.id)}><FontAwesomeIcon icon={faCheck} style={{ color: "#fff", }} /></button>
