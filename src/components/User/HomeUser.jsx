@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeUser = () => {
 
@@ -20,7 +21,8 @@ const HomeUser = () => {
         </div>
       </form>
 
-      <p>Não possui login?<a href="">Cadastre-se</a></p>
+      <p>Não possui login?<Link to={"/userRegistration"}>Cadastre-se</Link></p>
+      <Link to={"/app"}><p>Esqueceu a sua senha?</p></Link>
     </div>
   )
 }

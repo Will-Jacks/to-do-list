@@ -9,6 +9,7 @@ import { FormProvider } from './context/Tasks/FormContext.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomeUser from './components/User/HomeUser.jsx';
 import ErrorPage from './error-page.jsx';
+import UserRegistration from './components/User/UserRegistration.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,12 @@ const router = createBrowserRouter([
 
   },
   {
-    path:"/home",
+    path:"/app",
     element: <App />
+  },
+  {
+    path: "/userRegistration",
+    element: <UserRegistration />
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
