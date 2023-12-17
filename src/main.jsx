@@ -10,7 +10,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomeUser from './components/User/HomeUser.jsx';
 import ErrorPage from './error-page.jsx';
 import UserRegistration from './components/User/UserRegistration.jsx';
-
+import { UsersProvider } from './context/Users/UsersContext.jsx';
+import SuccessPage from './success-page.jsx';
 const router = createBrowserRouter([
   {
     path:"/",
@@ -25,16 +26,22 @@ const router = createBrowserRouter([
   {
     path: "/userRegistration",
     element: <UserRegistration />
+  }, 
+  {
+    path: "success/user-registration",
+    element: <SuccessPage />
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <div>
-    <FormProvider>
-      <TaskProvider>
-        <RenderFormProvider>
-          <RouterProvider router={router} />
-        </RenderFormProvider>
-      </TaskProvider>
-    </FormProvider>
+    <UsersProvider>
+      <FormProvider>
+        <TaskProvider>
+          <RenderFormProvider>
+            <RouterProvider router={router} />
+          </RenderFormProvider>
+        </TaskProvider>
+      </FormProvider>
+    </UsersProvider>
   </div>,
 )
