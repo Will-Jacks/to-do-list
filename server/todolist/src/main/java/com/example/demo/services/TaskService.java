@@ -20,16 +20,21 @@ public class TaskService {
         return tasksRepository.findAll();
     }
 
-    public ResponseEntity<String> postTask(@RequestBody Tasks task) {
+    public ResponseEntity<String> postTask(Tasks task) {
         try {
+            // Verificar se a tarefa já existe com base no nome
+            if (tasksRepository.existsByTaskName(task.getTaskName())) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("A tarefa já existe.");
+            }
             tasksRepository.save(task);
-            return new ResponseEntity<>("Cadastrado com sucecsso!", HttpStatus.CREATED);
+            return new ResponseEntity<>("Cadastrado com sucesso!", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Falha ao cadastrar tarefa!" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+
+    public ResponseEntity<String> deleteTask(Long id) {
         try {
             tasksRepository.deleteById(id);
             return ResponseEntity.ok("Tarefa excluída com sucesso!");

@@ -1,0 +1,65 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+#main-image-logo {
+    height: 200px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.150);
+    border-radius: 8px;
+    padding: 100px;
+}
+
+#user-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#password-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-button-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 100px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.315);
+    border-radius: 10px;
+}
+
+.submit-button-login:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+}
+
+.forgot-password-text {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    transition: 0.5s;
+}
+
+.forgot-password-text:hover {
+    color: rgba(0, 0, 0, 0.815);
+    background-color: rgb(230, 230, 230);
+    border-radius: 7px;
+    ;
+    transform: scale(1.1);
+}

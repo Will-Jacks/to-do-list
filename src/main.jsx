@@ -12,6 +12,7 @@ import ErrorPage from './error-page.jsx';
 import UserRegistration from './components/User/UserRegistration.jsx';
 import { UsersProvider } from './context/Users/UsersContext.jsx';
 import SuccessPage from './success-page.jsx';
+
 const router = createBrowserRouter([
   {
     path:"/",
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 
   },
   {
-    path:"/app",
+    path:"/all-tasks",
     element: <App />
   },
   {

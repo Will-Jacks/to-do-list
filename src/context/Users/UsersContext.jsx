@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 
+
 class UserData {
-    constructor(username, password, name) {
+    constructor(username, password, name, email) {
         this.username = username;
         this.password = password;
         this.name = name;
+        this.email = email;
     }
 }
 
@@ -19,14 +21,15 @@ export const UsersProvider = ({ children }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
 
     const userRegister = () => {
-        const newUser = new UserData(username, password, name);
+        const newUser = new UserData(username, password, name, email);
         postUser(newUser);
     }
 
     return (
-        <UserContext.Provider value={{ username, password, name, setUsername, setPassword, setName, userRegister }}>
+        <UserContext.Provider value={{ username, password, name, email, setEmail, setUsername, setPassword, setName, userRegister }}>
             {children}
         </UserContext.Provider>
     )
@@ -46,13 +49,22 @@ const postUser = async (newUser) => {
             body: JSON.stringify(newUser)
         });
 
+        if (response.ok) {
+            alert("Usuário cadastrado com sucesso!");
+            window.location.href = "http://localhost:5173/";
+        }
+
         if (!response.ok) {
-            return "Falha ao cadastrar tarefa";
+            throw new Error("Falha ao cadastrar usuário");
         }
 
     } catch (error) {
-        console.error("Erro ao fazer cadastro de usuário", error);
+        if (error.message == "Falha ao cadastrar usuário") {
+            alert("Usuário já cadastrado!");
+        } else {
+            console.log("Outro erro:", error);
+            alert("Erro ao cadastrar usuário. Por favor, tente novamente mais tarde.");
+        }
     }
-
 
 }

@@ -37,14 +37,15 @@ export const TaskProvider = ({ children }) => {
     async function getTasks() {
 
         //Dá fetch na api e atualiza as tasks para serem renderizadas
-        const url = "http://localhost:8080/tasks/all";
+        const url = "http://localhost:8080/users/tasks/24";
         const { success, data, error } = await fetchApi(url);
 
         if (success) {
             let newTask;
             // Vai percorrer o retorno da API pra extrair os dados e renderiza-los
-            for (let i = 0; i < data.length; i++) {
-                newTask = new TaskData(data[i].id, data[i].taskName, data[i].taskType);
+            for (let i = 0; i < data.tasks.length; i++) {
+                let task = data.tasks[i]; // precisa dessa etapa pq tasks é um array
+                newTask = new TaskData(task.id, task.taskName, task.taskType);
                 updateValue(newTask);
 
             }
@@ -56,7 +57,7 @@ export const TaskProvider = ({ children }) => {
 
     async function changeLocalIdFromBackendReturnedId() {
         //Dá fetch na api e atualiza as tasks para serem renderizadas
-        const url = "http://localhost:8080/tasks/all";
+        const url = "http://localhost:8080/tasks/all-tasks";
         const { success, data, error } = await fetchApi(url);
 
         if (success) {
