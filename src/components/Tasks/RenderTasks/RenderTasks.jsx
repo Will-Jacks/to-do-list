@@ -5,7 +5,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from 'react';
 
 function RenderTasks() {
-    const { tasks, changeTaskBehavior } = useTaskContext();
+    const { tasks, deleteTasks } = useTaskContext();
 
     return (
         <div>
@@ -19,14 +19,14 @@ function RenderTasks() {
                                 <p>ID: {element.id}</p>
                             </div>
                             <div>
-                                <button className="finish-task" onClick={()=> changeTaskBehavior(element.id)}><FontAwesomeIcon icon={faCheck} style={{ color: "#fff", }} /></button>
+                                <button className="finish-task" onClick={() => deleteTasks(element.id)}><FontAwesomeIcon icon={faCheck} style={{ color: "#fff", }} /></button>
                             </div>
                         </div>
                     )
                 })}
                 <div>
                 </div>
-            </div> 
+            </div>
         </div>
     );
 

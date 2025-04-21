@@ -1,15 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import fetchApi from "../../api/fetchApi";
 export const TaskContext = createContext();
 
 export class TaskData {
-    constructor(id, taskName, taskType) {
-        this.id = id;
+    constructor(taskName, taskType) {
         this.taskName = taskName;
         this.taskType = taskType;
-    }
-    static createWithoutId(taskName, taskType) {
-        return new TaskData(null, taskName, taskType);
     }
 }
 
@@ -22,61 +17,35 @@ export const TaskProvider = ({ children }) => {
 
 
     function updateValue(newTask) {
-
         setTasks(prevTasks => [...prevTasks, newTask]);
     }
 
-    const changeTaskBehavior = (id) => {
-
-        const deleteTasks = tasks.filter((element) => element.id != id); // Delete tasks
-        setTasks(deleteTasks);
+    const deleteTasks = (id) => {
+        const deletedTasks = tasks.filter((element) => element.id != id); // Delete tasks
+        setTasks(deletedTasks);
         deleteTask(id);
     }
 
     //    GET METHOD FRONT-END   //
     async function getTasks() {
-
-        //Dá fetch na api e atualiza as tasks para serem renderizadas
         const url = "http://localhost:8080/tasks/all";
-        const { success, data, error } = await fetchApi(url);
-
-        if (success) {
-            let newTask;
-            // Vai percorrer o retorno da API pra extrair os dados e renderiza-los
-            for (let i = 0; i < data.length; i++) {
-                newTask = new TaskData(data[i].id, data[i].taskName, data[i].taskType);
-                updateValue(newTask);
-
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             }
-        } else {
-            console.error("Erro ao solicitar dados da API", error);
-        }
+        });
+        const data = await response.json();
+        if (data) setTasks(data);
     }
     //    GET METHOD FRONT-END    //
-
-    async function changeLocalIdFromBackendReturnedId() {
-        //Dá fetch na api e atualiza as tasks para serem renderizadas
-        const url = "http://localhost:8080/tasks/all";
-        const { success, data, error } = await fetchApi(url);
-
-        if (success) {
-            let newTask;
-            // Vai percorrer o retorno da API pra extrair os dados e renderiza-los
-            for (let i = 0; i < data.length; i++) {
-                newTask = new TaskData(data[i].id, data[i].taskName, data[i].taskType);
-                setTasks([...tasks, newTask]);
-            }
-        } else {
-            console.error("Erro ao solicitar dados da API", error);
-        }
-    }
 
 
     //    POST METHOD    //
     async function postTask(newTask) {
 
         const url = "http://localhost:8080/tasks/cadastrar";
-
+        console.log(newTask);
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -90,7 +59,7 @@ export const TaskProvider = ({ children }) => {
                 throw new Error("Falha ao tentar cadastrar tarefa!");
             }
 
-            changeLocalIdFromBackendReturnedId();
+            getTasks();
 
         } catch (e) {
             console.error("Erro durante a requisição POST", e.message);
@@ -125,17 +94,13 @@ export const TaskProvider = ({ children }) => {
     //    DELETE METHOD    //
 
 
-    //Atualiza os valores vindos da API
+    //Ao entrar na página, o useEffect dá um fetch na API
     useEffect(() => {
         getTasks();
     }, []);
 
-    useEffect(() => {
-
-    }, [tasks])
-
     return (
-        <TaskContext.Provider value={{ tasks, changeTaskBehavior, updateValue, postTask }}>
+        <TaskContext.Provider value={{ tasks, deleteTasks, updateValue, postTask }}>
             {children}
         </TaskContext.Provider>
     );
