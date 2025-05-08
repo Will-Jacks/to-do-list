@@ -1,0 +1,39 @@
+.user-registration-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper-input-content{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0, 0.2);
+    
+    padding: 65px;
+}
+
+.input-label-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.input-field {
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.submit-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
